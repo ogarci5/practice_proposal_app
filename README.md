@@ -1,5 +1,4 @@
 ## Start Up Steps
-Resque scheduler is optional. The steps will include resque scheduler for completeness.
 Modify `Gemfile` to include 'resque' gem and 'resque-scheduler' gem
 ```ruby
 
