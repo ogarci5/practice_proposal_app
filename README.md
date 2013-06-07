@@ -48,10 +48,10 @@ task "resque:setup" => :environment do
   ENV['QUEUE'] = '*'
 end
 ```
-Make sure PostgreSQL is installed and create the resque_app user
+Make sure PostgreSQL is installed and create the rack user
 
 	$ psql
-	> CREATE ROLE resque_app WITH SUPERUSER LOGIN;
+	> CREATE ROLE rack WITH SUPERUSER LOGIN;
 	> \q
 Create rails databases and run migrations
 
