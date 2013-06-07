@@ -90,4 +90,4 @@ Finally add the new Redis init script to all the default runlevels using the fol
 	$ sudo update-rc.d redis_6379 defaults
 You are done! Now you can try running your instance with:
 
-	$ /etc/init.d/redis_6379 start
+$ /etc/init.d/redis_6379 start
