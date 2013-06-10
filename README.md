@@ -1,5 +1,5 @@
 ###Start Up Steps
-####Redis and Resque
+#####Redis and Resque
 Modify `Gemfile` to include 'resque' gem and 'resque-scheduler' gem
 ```ruby
 gem 'resque'
@@ -66,9 +66,9 @@ Call the job by running
 Resque.enqueue(MyJob, params)
 ```
 
-####Jenkins
+#####Jenkins
 
-####New Relic
+#####New Relic
 Create an account on [New Relic](http://newrelic.com/).  
 Follow the steps outlined by New Relic.
 Add the new relic gem to the `Gemfile`:
@@ -80,8 +80,7 @@ Install the new gem:
 	$ bundle install
 Add the `newrelic.yml` file provided by New Relic to `config/`
 
-###Redis Configuration
-For Ubuntu -
+#####Ubuntu Redis Configuration
 Edit the init script:
 
 	$ nano /etc/init.d/redis_6379
