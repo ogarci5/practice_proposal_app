@@ -30,6 +30,9 @@ end
 group :test do
   gem 'capybara', '1.1.2'
   gem 'factory_girl_rails', '4.1.0'
+  
+  # allow Jenkins to read rspec output
+  gem 'ci_reporter'
 end
 
 # To use ActiveModel has_secure_password
