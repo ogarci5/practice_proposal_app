@@ -1,2 +1,15 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
+
+/* General styles */
+.center {
+  text-align:center;
+}
+
+.log-in {
+  width:$gridColumnWidth *3 ;
+  margin: 0 auto;
+  input {
+    width: 100%;
+  }
+}
