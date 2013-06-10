@@ -6,7 +6,7 @@ describe User do
   
   subject { user }
 
-  it { should respond_to(:namew) }
+  it { should respond_to(:name) }
   it { should respond_to(:email) }
 
   it { should be_valid }
