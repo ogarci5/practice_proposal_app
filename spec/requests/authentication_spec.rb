@@ -11,7 +11,7 @@ describe "Authentication" do
     describe "with invalid information" do
       before {click_button "Log in"}
       
-      it {should have_selector("h4" text: "Log in")}
+      it {should have_selector("h4", text: "Log in")}
     end
     
     describe "with valid information" do
@@ -20,7 +20,7 @@ describe "Authentication" do
       before{valid_login(user)}
       it {should have_selector("h2", text: "Welcome")}
       it {should have_link("Log out", href: logout_path)}
-      it {should_not have_link("Log in" href: login_path)}
+      it {should_not have_link("Log in", href: login_path)}
       
       describe "followed by log out" do
         before { click_link "Sign out" }
