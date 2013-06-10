@@ -81,5 +81,5 @@ have not been recorded in Jenkins. There are two ways to fix this:
 
 #### More Info
 
-	 http://yakiloo.com/setup-jenkins-and-rvm/
+http://yakiloo.com/setup-jenkins-and-rvm/
  
