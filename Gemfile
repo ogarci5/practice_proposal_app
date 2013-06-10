@@ -9,12 +9,9 @@ gem 'pg'
 gem 'resque'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '2.1'
-<<<<<<< HEAD
 gem 'resque'
 gem 'resque-scheduler'
-=======
 gem 'newrelic_rpm'
->>>>>>> e1d3a35f95fa87a6d2bf2132ad8e872cc3d3001d
 
 # Gems used only for assets and not required
 # in production environments by default.
