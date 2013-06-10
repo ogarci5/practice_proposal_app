@@ -4,5 +4,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'resque/tasks'
+require 'ci/reporter/rake/rspec'
 
 PracticeProposalApp::Application.load_tasks
