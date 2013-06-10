@@ -73,7 +73,7 @@ common: &default_settings
   # The encryption required by SSL introduces a nominal amount of CPU overhead,
   # which is performed asynchronously in a background thread.  If you'd prefer
   # to send your metrics over http uncomment the following line.
-  # ssl: false
+  ssl: false
 
   #============================== Browser Monitoring ===============================
   # New Relic Real User Monitoring gives you insight into the performance real users are
@@ -192,7 +192,7 @@ development:
   # 'enabled').
   # NOTE: for initial evaluation purposes, you may want to temporarily
   # turn the agent on in development mode.
-  monitor_mode: false
+  monitor_mode: true
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will
   # present performance information on the last 100 transactions you have
