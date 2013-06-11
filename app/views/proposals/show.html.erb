@@ -1,0 +1,26 @@
+<div class="row">  
+  <div class="span6 offset3">
+    <h4 class="center">New Proposal</h4>
+    <div class="form">
+    <%= form_for @proposal do |f|%>
+    <div>
+     	<p>Name:
+			<%= @proposal.name %></p>
+			 <p>From:
+			<%= @proposal.from %></p>
+			<p>Description:
+			<%= @proposal.description %></p>
+	    <%= form_for(@proposal) do |f|%>
+	    <div>
+	      <%= f.label :response %>
+	      <%= f.text_area :response, style: "height:80px;resize:none;" %>
+	      <br />
+	      <%= f.submit "Send Response", class: "btn" %>
+	    </div>
+	    <% end %>
+			
+    </div>
+    <% end %>
+    </div>
+  </div>
+</div>

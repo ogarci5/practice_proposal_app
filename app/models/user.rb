@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
     email.downcase!
   end
   before_save :create_remember_token
-  
+  has_many :proposals, dependent: :destroy
   private
 
     def create_remember_token

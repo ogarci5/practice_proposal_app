@@ -78,7 +78,8 @@ gem 'newrelic_rpm'
 Install the new gem:
 
 	$ bundle install
-Add the `newrelic.yml` file provided by New Relic to `config/`
+Add the `newrelic.yml` file provided by New Relic to `config/`  
+Restart the server.
 
 #####Ubuntu Redis Configuration
 Edit the init script:
