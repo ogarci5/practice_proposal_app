@@ -25,12 +25,15 @@ class ProposalsController < ApplicationController
   
   def update
     @proposal = Proposal.find(params[:id])
-
-    @proposal.update_attributes(params[:proposal])
-    if @proposal.update_attributes(params[:proposal])
-      authentication = {:authenticity_token => current_user.remember_token}
-      Resque.enqueue(MyJob, params[:proposal], authentication)
-      redirect_to proposals_path
-    end
+    message = params[:proposal].merge!(id: params[:id])
+    authentication = {:authenticity_token => current_user.remember_token}
+    Resque.enqueue(MyJob, message, authentication)
+    redirect_to proposals_path
+    #@proposal.update_attributes(params[:proposal])
+    #if @proposal.update_attributes(params[:proposal])
+    #  authentication = {:authenticity_token => current_user.remember_token}
+    #  Resque.enqueue(MyJob, params[:proposal], authentication)
+      
+      #end
   end
 end
