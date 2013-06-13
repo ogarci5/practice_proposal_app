@@ -4,16 +4,17 @@
     <div class="main">
 			<table>
 				<tr>
-					<th>Name</th>
-					<th>From</th>
+					<th align="left">Name</th>
+					<th align="left">From</th>
 				</tr>
 			<% @proposals.each do |proposal|%>
-			<tr>
-				<div>
-				<td> <%=link_to proposal.name, proposal%></td>
-				<td><%=proposal.from%></td>
-			</div>
-			</tr>
+				<% r = reviewed?(proposal) %>
+				<tr>
+					<div >
+						<td class="<%= r %>" > <%=link_to proposal.name, proposal%></td>
+						<td class="<%= r %>" ><%=proposal.from%></td>
+					</div>
+				</tr>
 			<%end%>
 			</table>
 			<br/>

@@ -1,7 +1,13 @@
 module ProposalsHelper
   
-  def unread_response?(proposal)
-    return proposal.reviewed==true && proposal.response_read==false
+  def reviewed?(proposal)
+    if proposal.reviewed==true && proposal.response_read==false
+      return "reviewed"
+    elsif proposal.reviewed==true && proposal.response_read==true
+      return "read"
+    else
+      return "new"
+    end
   end
   
   def num_unread_responses(current_user)

@@ -1,0 +1,18 @@
+Thu, 13 Jun 2013 13:43:01 -0500
+doc/README_FOR_APP	Fri, 07 Jun 2013 11:36:39 -0500
+app/controllers/application_controller.rb	Thu, 13 Jun 2013 09:28:50 -0500
+app/controllers/home_controller.rb	Mon, 10 Jun 2013 09:46:31 -0500
+app/controllers/proposals_controller.rb	Thu, 13 Jun 2013 11:32:56 -0500
+app/controllers/responses_controller.rb	Thu, 13 Jun 2013 10:39:58 -0500
+app/controllers/sessions_controller.rb	Wed, 12 Jun 2013 10:31:44 -0500
+app/controllers/users_controller.rb	Fri, 07 Jun 2013 15:11:14 -0500
+app/helpers/application_helper.rb	Wed, 12 Jun 2013 15:06:04 -0500
+app/helpers/home_helper.rb	Mon, 10 Jun 2013 09:46:31 -0500
+app/helpers/proposals_helper.rb	Thu, 13 Jun 2013 13:34:32 -0500
+app/helpers/responses_helper.rb	Tue, 11 Jun 2013 13:50:17 -0500
+app/helpers/sessions_helper.rb	Mon, 10 Jun 2013 16:10:14 -0500
+app/helpers/users_helper.rb	Fri, 07 Jun 2013 15:11:15 -0500
+app/jobs/myapp.rb	Thu, 13 Jun 2013 09:28:50 -0500
+app/mailers/response_mailer.rb	Wed, 12 Jun 2013 10:28:03 -0500
+app/models/proposal.rb	Tue, 11 Jun 2013 13:50:17 -0500
+app/models/user.rb	Tue, 11 Jun 2013 13:50:17 -0500

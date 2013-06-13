@@ -8,7 +8,7 @@
 					<th>From</th>
 				</tr>
 			<% @proposals.each do |proposal|%>
-			<tr style='font-weight: <%=unread_response?(proposal) ?'bold':''%>'>
+			<tr>
 				<td><%=link_to proposal.name, respons_path + '?id=' +  proposal.id.to_s %></td>
 				<td><%=proposal.from%></td>
 			</tr>
