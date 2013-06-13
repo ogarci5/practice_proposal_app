@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610211818) do
+ActiveRecord::Schema.define(:version => 20130612201512) do
 
   create_table "proposals", :force => true do |t|
     t.string   "name"
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(:version => 20130610211818) do
     t.string   "from"
     t.integer  "user_id"
     t.text     "response"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "response_read", :default => false
+    t.string   "reviewed",      :default => "f"
   end
 
   add_index "proposals", ["user_id"], :name => "index_proposals_on_user_id"

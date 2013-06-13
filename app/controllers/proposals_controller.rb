@@ -1,12 +1,27 @@
 class ProposalsController < ApplicationController
   def index
+    @proposals = Proposal.where(:user_id => current_user.id)
+    #.find_all {|p| !p.responded?}
+  end
+  def responses
+    @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| p.responded?}
+  end
+  def pending_responses
     @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| !p.responded?}
   end
   def show
     @proposal = Proposal.find(params[:id])
   end
+  def show_response
+    @proposal = Proposal.find(params[:id])
+    @proposal.response_read = true
+    @proposal.save
+  end
+  def respond_to_proposal
+    @proposal = Proposal.find(params[:id])
+  end
+  
   def edit
-    
   end
   def create
     @user = User.find(params[:proposal][:user_id])
@@ -22,7 +37,6 @@ class ProposalsController < ApplicationController
   end
   def destroy
   end
-  
   def update
     @proposal = Proposal.find(params[:id])
 
@@ -31,6 +45,8 @@ class ProposalsController < ApplicationController
       authentication = {:authenticity_token => current_user.remember_token}
       Resque.enqueue(MyJob, params[:proposal], authentication)
       redirect_to proposals_path
+      
+      #ResponseMailer.welcome_email(@proposal).deliver
     end
   end
 end

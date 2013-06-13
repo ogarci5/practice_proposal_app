@@ -171,6 +171,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer (~> 3.2.13)
   bcrypt-ruby (~> 3.0.0)
   bootstrap-sass (= 2.1)
   capybara (= 1.1.2)
