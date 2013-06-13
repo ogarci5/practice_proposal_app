@@ -20,6 +20,6 @@ database.yml
 # ignore redis snapshots
 dump.rdb*
 
-# ignore files created by Bundler during install
+# ignore files created by Bundler during gem install
 Gemfile.lock
 Gemfile.orig

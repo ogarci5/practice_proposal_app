@@ -1,5 +1,5 @@
 ###Start Up Steps
-#####Redis and Resque
+####Redis and Resque
 Modify `Gemfile` to include 'resque' gem and 'resque-scheduler' gem
 ```ruby
 gem 'resque'
@@ -7,13 +7,16 @@ gem 'resque'
 Install gems
 
 	$ bundle install
+
 Install 'redis'
 
 	$ brew install redis
-Run redis server 
+
+Run redis server: 
 
 	$ redis-server
-Redis is running on port 6379
+
+Redis is now running on port 6379
 
 Setup config file for resque in `/config/initializers/resque.rb` with local redis server config
 ```ruby
@@ -24,7 +27,8 @@ Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 ```
 Jobs created should be in `app/jobs/`:
 ```ruby
-#Example: /app/jobs/myjob.rb
+
+#####Example: /app/jobs/myjob.rb
 
 module MyJob
   @queue = :default
@@ -66,9 +70,11 @@ Call the job by running
 Resque.enqueue(MyJob, params)
 ```
 
-#####Jenkins
+####Jenkins
 
-#####New Relic
+See app/doc/JENKINS_INSTALL.md 
+
+####New Relic
 Create an account on [New Relic](http://newrelic.com/).  
 Follow the steps outlined by New Relic.
 Add the new relic gem to the `Gemfile`:
@@ -81,7 +87,7 @@ Install the new gem:
 Add the `newrelic.yml` file provided by New Relic to `config/`  
 Restart the server.
 
-#####Ubuntu Redis Configuration
+####Ubuntu Redis Configuration
 Edit the init script:
 
 	$ nano /etc/init.d/redis_6379
