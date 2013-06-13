@@ -1,5 +1,7 @@
 module ProposalsHelper
-  
+  def email_proposer(email, proposal)
+    Resque.enqueue(MailGun, email, proposal)
+  end
   def unread_response?(proposal)
     return proposal.reviewed==true && proposal.response_read==false
   end

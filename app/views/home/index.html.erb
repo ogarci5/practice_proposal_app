@@ -8,6 +8,7 @@
 	<s><%=link_to "Received responses", responses_path %></s>
 	<b><%= num_unread_responses(current_user) %></b><br>
 	<%=link_to "To be responded to", respondant_path%>
-	<b><%= num_unreviewed_responses(current_user) %></b>
+	<b><%= num_unreviewed_responses(current_user) %></b><br>
+	<%=link_to "Send Mail", "/mailgun"%>
 	
 <%end%> 

@@ -11,7 +11,7 @@
 				<tr><th>Description</th></tr>
 				<tr><td><%= @proposal.description %></td></tr>
 			</table>
-	    <%= form_for(@proposal, :url => root_path, :html => {:method => :put}) do |f|%>
+	    <%= form_for(@proposal) do |f|%>
 	  		<div>
 	     	  <%= f.label :response %>
 	      	<%= f.text_area :response, style: "height:80px;resize:none;" %>

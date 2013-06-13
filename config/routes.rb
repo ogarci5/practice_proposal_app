@@ -6,6 +6,7 @@ PracticeProposalApp::Application.routes.draw do
 
   match "/login", to: "sessions#new"
   match "/logout", to: 'sessions#destroy', via: :delete
+  match "/mailgun", to: 'responses#api_mailgun', via: :get
   match "/responses", to: 'responses#api_response', via: :post    # lists proposals which user needs to respond to
   match "/respons", to: 'proposals#show_response'                 # shows the sender a response
   match "/respondant", to: 'proposals#pending_responses'          
