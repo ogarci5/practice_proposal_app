@@ -37,9 +37,19 @@ class ProposalsController < ApplicationController
   end
   def destroy
   end
-  
   def update
+    @proposal = Proposal.find(params[:id])
+<<<<<<< HEAD
 
+    @proposal.update_attributes(params[:proposal])
+    if @proposal.update_attributes(params[:proposal])
+      authentication = {:authenticity_token => current_user.remember_token}
+      Resque.enqueue(MyJob, params[:proposal], authentication)
+      redirect_to proposals_path
+      
+      #ResponseMailer.welcome_email(@proposal).deliver
+    end
+=======
     message = params[:proposal].merge!(id: params[:id])
     authentication = {:authenticity_token => current_user.remember_token}
     Resque.enqueue(MyJob, message, authentication)
@@ -50,5 +60,6 @@ class ProposalsController < ApplicationController
     #  Resque.enqueue(MyJob, params[:proposal], authentication)
       
       #end
+>>>>>>> c54b37d4e5450e053d180dbbc1aeb96b18d09b84
   end
 end

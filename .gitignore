@@ -16,3 +16,10 @@
 
 # ignore database config file
 database.yml
+
+# ignore redis snapshots
+dump.rdb*
+
+# ignore files created by Bundler during install
+Gemfile.lock
+Gemfile.orig

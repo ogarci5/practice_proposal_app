@@ -6,11 +6,15 @@ PracticeProposalApp::Application.routes.draw do
 
   match "/login", to: "sessions#new"
   match "/logout", to: 'sessions#destroy', via: :delete
-  match "/responses", to: 'responses#api_response', via: :post
+<<<<<<< HEAD
+  match "/responses", to: 'proposals#responses'
   match "/respons", to: 'proposals#show_response'
   match "/respondant", to: 'proposals#pending_responses'
   match "/respond", to: 'proposals#respond_to_proposal'
   
+=======
+  match "/responses", to: 'responses#api_response', via: :post
+>>>>>>> c54b37d4e5450e053d180dbbc1aeb96b18d09b84
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
