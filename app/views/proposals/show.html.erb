@@ -1,29 +1,24 @@
 <div class="row">  
   <div class="span6 offset3">
-    <h4 class="center">New Proposal</h4>
+    <h4 class="center">View Proposal</h4>
     <div class="form">
     <%= form_for @proposal do |f|%>
     <div>
-			<table border="0" cellspacing="0" cellpadding="0">
+			<table border="0" cellspacing="0" cellpadding="2">
 				<tr><th>Name</th></tr>
 				<tr><td><%= @proposal.name %></td></tr>
 				<tr><th>From</th></tr>
 				<tr><td><%= @proposal.from %></td></tr>
 				<tr><th>Description</th></tr>
 				<tr><td><%= @proposal.description %></td></tr>
+				<tr><th>Response</th></tr>
+				<tr><td><%= @proposal.response %></td></tr>
 			</table>
-	    <%= form_for(@proposal) do |f|%>
-	    <div>
-	      <%= f.label :response %>
-	      <%= f.text_area :response, style: "height:80px;resize:none;" %>
-	      <br />
-				<div>
-	      	<%= f.submit "Send Response", class: "btn" %>
-					<%=link_to "Back", proposals_path, class: "btn"%>
-				</div>
-	    </div>
-	    <% end %>
-			
+			<br/>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr><td><%=link_to_function "Back", "history.back()", class: "btn"%></td></tr>
+				<tr><td><%=link_to "Home", root_path, class: "btn"%></td></tr>
+			</table>
     </div>
     <% end %>
     </div>

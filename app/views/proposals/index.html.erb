@@ -1,6 +1,6 @@
 <div class="row">  
   <div class="span6 offset3">
-    <h4 class="center">Your Proposals</h4>
+    <h4 class="center">My Proposals</h4>
     <div class="main">
 			<table>
 				<tr>
@@ -9,10 +9,10 @@
 				</tr>
 			<% @proposals.each do |proposal|%>
 			<tr>
-				<font weight:bold>
-				<td> <%=link_to proposal.name, proposal%></font></td>
+				<div>
+				<td> <%=link_to proposal.name, proposal%></td>
 				<td><%=proposal.from%></td>
-			</font>
+			</div>
 			</tr>
 			<%end%>
 			</table>

@@ -6,9 +6,9 @@ PracticeProposalApp::Application.routes.draw do
 
   match "/login", to: "sessions#new"
   match "/logout", to: 'sessions#destroy', via: :delete
-  match "/responses", to: 'responses#api_response', via: :post
-  match "/respons", to: 'proposals#show_response'
-  match "/respondant", to: 'proposals#pending_responses'
+  match "/responses", to: 'responses#api_response', via: :post    # lists proposals which user needs to respond to
+  match "/respons", to: 'proposals#show_response'                 # shows the sender a response
+  match "/respondant", to: 'proposals#pending_responses'          
   match "/respond", to: 'proposals#respond_to_proposal'
   
   # The priority is based upon order of creation:

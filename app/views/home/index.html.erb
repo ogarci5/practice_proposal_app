@@ -4,8 +4,8 @@
 <%else%>
   <%=link_to "Log out", logout_path, method: "delete"%><br>
 	<%=link_to "Create new proposal", new_proposal_path%><br>
-	<%=link_to "Sent proposals", proposals_path%><br>
-	<%=link_to "Received responses", responses_path %>
+	<%=link_to "My proposals", proposals_path%><br>
+	<s><%=link_to "Received responses", responses_path %></s>
 	<b><%= num_unread_responses(current_user) %></b><br>
 	<%=link_to "To be responded to", respondant_path%>
 	<b><%= num_unreviewed_responses(current_user) %></b>
