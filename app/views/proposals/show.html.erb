@@ -4,18 +4,23 @@
     <div class="form">
     <%= form_for @proposal do |f|%>
     <div>
-     	<p>Name:
-			<%= @proposal.name %></p>
-			 <p>From:
-			<%= @proposal.from %></p>
-			<p>Description:
-			<%= @proposal.description %></p>
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr><th>Name</th></tr>
+				<tr><td><%= @proposal.name %></td></tr>
+				<tr><th>From</th></tr>
+				<tr><td><%= @proposal.from %></td></tr>
+				<tr><th>Description</th></tr>
+				<tr><td><%= @proposal.description %></td></tr>
+			</table>
 	    <%= form_for(@proposal) do |f|%>
 	    <div>
 	      <%= f.label :response %>
 	      <%= f.text_area :response, style: "height:80px;resize:none;" %>
 	      <br />
-	      <%= f.submit "Send Response", class: "btn" %>
+				<div>
+	      	<%= f.submit "Send Response", class: "btn" %>
+					<%=link_to "Back", proposals_path, class: "btn"%>
+				</div>
 	    </div>
 	    <% end %>
 			

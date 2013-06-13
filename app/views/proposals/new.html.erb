@@ -13,7 +13,11 @@
       <%= f.label :description %>
       <%= f.text_area :description, style: "height:80px;resize:none;" %>
       <br />
-      <%= f.submit "Create Proposal", class: "btn" %>
+      
+			<div>
+      	<%= f.submit "Create Proposal", class: "btn" %>
+				<%=link_to "Back", root_path, class: "btn"%>
+			</div>
     </div>
     <% end %>
     </div>
