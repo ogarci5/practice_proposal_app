@@ -20,9 +20,9 @@ class ResponsesController < ApplicationController
     respond_with(params, :status => 200)
     #close
   end
-  after_filter :print_response_body, :only => [:api_response]
+  after_filter :close_connection, :only => [:api_response]
 
-  def print_response_body 
+  def close_connection 
     $stderr.puts response.body
     response.close
   end

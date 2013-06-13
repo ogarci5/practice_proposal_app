@@ -7,10 +7,23 @@
 }
 
 .form {
-  width:$gridColumnWidth * 3 ;
+  width:$gridColumnWidth * 4 ;
   margin: 0 auto;
   input, textarea {
-    width: 100%;
+    width: 93%;
+  }
+  .btn {
+  	width: 100%;
+  }
+  a {
+	  padding:4px 0;
+  }
+  select {
+  	width: 99%;
+  }
+  table, tr {
+	width: 100%;
+	text-align: left;
   }
 }
 
