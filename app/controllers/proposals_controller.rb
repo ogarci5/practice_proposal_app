@@ -55,7 +55,6 @@ class ProposalsController < ApplicationController
     #if @proposal.update_attributes(params[:proposal])
     #  authentication = {:authenticity_token => current_user.remember_token}
     #  Resque.enqueue(MyJob, params[:proposal], authentication)
-      
-      #end
+    #end
   end
 end

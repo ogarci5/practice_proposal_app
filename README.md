@@ -62,7 +62,7 @@ Create rails databases and run migrations
 	$ rake db:create:all
 	$ rake db:migrate
 
-Start the scheduler: 
+Start the resque process: 
 
 	$ rake resque:work
 
@@ -87,7 +87,7 @@ Install the new gem:
 	$ bundle install
 Add the `newrelic.yml` file provided by New Relic to `config/`  
 Restart the server.
-
+Go to https://rpm.newrelic.com/accounts/349165/applications/2127803
 ####Ubuntu Redis Configuration
 Edit the init script:
 
