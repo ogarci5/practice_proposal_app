@@ -65,6 +65,7 @@ Create rails databases and run migrations
 Start the scheduler: 
 
 	$ rake resque:work
+
 Call the job by running
 ```ruby
 Resque.enqueue(MyJob, params)
