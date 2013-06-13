@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module MyJob - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/jobs/myapp.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-perform">::perform</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./HomeController.html">HomeController</a>
+  
+    <li><a href="./HomeHelper.html">HomeHelper</a>
+  
+    <li><a href="./MyJob.html">MyJob</a>
+  
+    <li><a href="./Proposal.html">Proposal</a>
+  
+    <li><a href="./ProposalsController.html">ProposalsController</a>
+  
+    <li><a href="./ProposalsHelper.html">ProposalsHelper</a>
+  
+    <li><a href="./ResponseMailer.html">ResponseMailer</a>
+  
+    <li><a href="./ResponsesController.html">ResponsesController</a>
+  
+    <li><a href="./ResponsesHelper.html">ResponsesHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./SessionsHelper.html">SessionsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module MyJob</h1>
+
+  <div id="description" class="description">
+    
+<p>Example: /app/jobs/myjob.rb</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-perform" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">perform</span><span
+            class="method-args">(response, authentication)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="perform-source">
+            <pre><span class="ruby-comment"># File app/jobs/myapp.rb, line 5</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">perform</span>(<span class="ruby-identifier">response</span>, <span class="ruby-identifier">authentication</span>)
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Doing my job&quot;</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-string">'net/http'</span>
+    <span class="ruby-identifier">message</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">authentication</span>)
+    <span class="ruby-identifier">header</span> = {<span class="ruby-string">'X-CSRF-Token'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">authentication</span>[<span class="ruby-value">:authenticity_token</span>]}
+    <span class="ruby-identifier">initheader</span> = {<span class="ruby-string">'Content-Type'</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">'application/json'</span>,
+          <span class="ruby-string">'Accept'</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">'application/json'</span>}
+    <span class="ruby-ivar">@host</span> = <span class="ruby-string">'localhost'</span>
+    <span class="ruby-ivar">@port</span> = <span class="ruby-string">'3000'</span>
+    <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;http://localhost:3000/responses&quot;</span>)
+    <span class="ruby-ivar">@path</span> = <span class="ruby-string">'/responses'</span>
+
+    <span class="ruby-ivar">@body</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">message</span>)
+
+    <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@body</span>
+    <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@path</span>, <span class="ruby-identifier">initheader</span> = {<span class="ruby-string">'Content-Type'</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">'application/json'</span>,
+      <span class="ruby-string">'Accept'</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">'application/json'</span>})
+    <span class="ruby-identifier">p</span> <span class="ruby-identifier">request</span>
+    <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span> = <span class="ruby-ivar">@body</span>
+    <span class="ruby-identifier">p</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-ivar">@host</span>, <span class="ruby-ivar">@port</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span> <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>) }
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@host</span>, <span class="ruby-ivar">@port</span>).<span class="ruby-identifier">start</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span> 
+      <span class="ruby-identifier">p</span> <span class="ruby-identifier">http</span>
+      <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>) 
+  <span class="ruby-keyword">end</span>
+    <span class="ruby-comment">#response = HTTParty.post('http://localhost:3000/responses', body: @body, headers: initheader)</span>
+    <span class="ruby-comment">#puts response.body, response.code, response.message, response.headers.inspect</span>
+    <span class="ruby-comment">#puts response.body if response.response_body_permitted?</span>
+    <span class="ruby-comment">#p response</span>
+   <span class="ruby-comment"># Net::HTTP.start(uri.host, uri.port) do |http|</span>
+    <span class="ruby-comment">#  request = Net::HTTP::Get.new uri.request_uri</span>
+    
+    <span class="ruby-comment">#  response = http.request request # Net::HTTPResponse object</span>
+    <span class="ruby-comment">#end</span>
+   <span class="ruby-comment"># http = Net::HTTP.new(@host, @port)</span>
+   <span class="ruby-comment">#response = Net::HTTP.post_form(uri, message)</span>
+    <span class="ruby-comment">#request = Net::HTTP::Post.new(@path)</span>
+    <span class="ruby-comment">#request.set_form_data(@body)</span>
+    <span class="ruby-comment">#request[&quot;Content-Type&quot;] = &quot;application/json&quot;</span>
+    <span class="ruby-comment">#request[&quot;Accept&quot;] = &quot;application/json&quot;</span>
+    <span class="ruby-comment">#response = http.request(request)</span>
+    <span class="ruby-comment">#case response</span>
+    <span class="ruby-comment">#when Net::HTTPSuccess, Net::HTTPRedirection</span>
+      <span class="ruby-comment"># OK</span>
+      <span class="ruby-comment">#else</span>
+    <span class="ruby-comment">#  p response.value</span>
+    <span class="ruby-comment">#end</span>
+    <span class="ruby-identifier">p</span> <span class="ruby-string">&quot;Done&quot;</span>
+    <span class="ruby-comment">#puts response.body</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Response #{response.code} #{response.message}: #{response.body}&quot;</span>
+<span class="ruby-comment">      # Convert the parameters into JSON and set the content type as application/json
+      req = Net::HTTP::Post.new(@path)
+      req.body = @body
+      req[&quot;Content-Type&quot;] = &quot;application/json&quot;
+      req[&quot;X-CSRF-Token&quot;] = authentication[:authenticity_token]
+      http = Net::HTTP.new(@host, @port)
+      response = http.start {|htt| htt.request(req)}
+
+      puts &quot;Response #{response.code} #{response.message}: #{response.body}&quot;
+</span>      <span class="ruby-comment">#request = Net::HTTP::Post.new(@path, initheader = {'Content-Type' =&gt;'application/json'})</span>
+      <span class="ruby-comment">#request.set_form_data(@body)</span>
+      <span class="ruby-comment">#request.add_field(&quot;X-CSRF-Token&quot;, authentication[:authenticity_token])</span>
+      <span class="ruby-comment">#response = Net::HTTP.new(@host, @port).start {|http| http.request(request) }</span>
+  <span class="ruby-keyword">end</span></pre>
+          </div><!-- perform-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- perform-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
