@@ -10,7 +10,13 @@
   width:$gridColumnWidth * 3 ;
   margin: 0 auto;
   input, textarea {
-    width: 100%;
+    width: 91%;
+  }
+  input.btn {
+  	width: 100%;
+  }
+  select {
+  	width: 99%;
   }
 }
 
