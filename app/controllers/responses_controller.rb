@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
     @user = User.find_by_name(@proposal.from)
     if authenticated
       @proposal.update_attributes(response: params[:response])
-      email_proposer(@user.email, @proposal)
+      # email_proposer(@user.email, @proposal)
     end
     respond_with(params, :status => 200)
   end

@@ -21,7 +21,7 @@ module ProposalsHelper
   end
   
   def num_unreviewed_responses(current_user)
-  	p = (Proposal.where(from: current_user.name ).find_all{|f| f.reviewed==false}).count
+  	p = (Proposal.where(user_id: current_user.id ).find_all{|f| f.reviewed==false}).count
   	if p>0
   		return "(#{p})"
     else
