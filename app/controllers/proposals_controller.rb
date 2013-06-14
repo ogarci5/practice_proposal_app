@@ -42,6 +42,7 @@ class ProposalsController < ApplicationController
     message = params[:proposal].merge!(id: params[:id])
     authentication = {:authenticity_token => current_user.remember_token}
     Resque.enqueue(APIAccess, message, authentication)
+    @proposal = Proposal.find(params[:id])
     @proposal.reviewed = true
     @proposal.save
     redirect_to respondant_path
