@@ -31,3 +31,4 @@ Install the new gem:
 Add the `newrelic.yml` file provided by New Relic to `config/`  
 Restart the server.
 Go to https://rpm.newrelic.com/accounts/349165/applications/2127803
+Steps from http://redis.io/topics/quickstart

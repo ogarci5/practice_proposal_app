@@ -14,6 +14,8 @@ gem 'resque-scheduler'
 gem 'newrelic_rpm'
 gem "actionmailer", "~> 3.2.13"
 gem 'httparty'
+gem 'rest-client'
+gem 'multimap'
 
 # Gems used only for assets and not required
 # in production environments by default.

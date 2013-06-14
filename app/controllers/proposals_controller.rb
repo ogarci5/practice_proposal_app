@@ -1,6 +1,7 @@
 class ProposalsController < ApplicationController
   def index
     @proposals = Proposal.where(:user_id => current_user.id)
+    #.find_all {|p| !p.responded?}
   end
   def responses
     @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| p.reviewed?}
@@ -10,10 +11,12 @@ class ProposalsController < ApplicationController
   end
   def show
     @proposal = Proposal.find(params[:id])
+  end
+  def show_response
+    @proposal = Proposal.find(params[:id])
     @proposal.response_read = true
     @proposal.save
   end
-
   def respond_to_proposal
     @proposal = Proposal.find(params[:id])
   end
@@ -36,11 +39,9 @@ class ProposalsController < ApplicationController
   end
   
   def update
-    @proposal = Proposal.find(params[:id])
-    @proposal.reviewed = true
     message = params[:proposal].merge!(id: params[:id])
     authentication = {:authenticity_token => current_user.remember_token}
-    Resque.enqueue(MyJob, message, authentication)
+    Resque.enqueue(APIAccess, message, authentication)
     @proposal.reviewed = true
     @proposal.save
     redirect_to respondant_path

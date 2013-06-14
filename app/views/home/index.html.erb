@@ -6,6 +6,7 @@
 	<%=link_to "Create new proposal", new_proposal_path%><br>
 	<%=link_to "My proposals", proposals_path%><br>
 	<%=link_to "To be responded to", respondant_path%>
-	<b><%= num_unreviewed_responses(current_user) %></b>
+	<b><%= num_unreviewed_responses(current_user) %></b><br>
+	<%=link_to "Send Mail", "/mailgun"%>
 	
 <%end%> 

@@ -1,29 +1,24 @@
 class ResponsesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   respond_to :html, :json
+  include ProposalsHelper
+  
   def api_response
     require 'net/http'
-    p params
-    #respond_to do |format|
-    #  format.html
-    #  format.json { render json: params }
-    #end
-    flash[:success] = "#{params} was received."
-    p flash[:success]
-    p response_body
+    puts params
     @proposal = Proposal.find(params[:id])
-    @user = User.find_by_remember_token(params[:authenticity_token])
-    if !@user.nil?
+    authenticated = !User.find_by_remember_token(params[:authenticity_token]).nil?
+    @user = User.find_by_name(@proposal.from)
+    if authenticated
       @proposal.update_attributes(response: params[:response])
+      email_proposer(@user.email, @proposal)
     end
-    #render :json => params.to_json, :status => :unprocessable_entity
     respond_with(params, :status => 200)
-    #close
   end
   after_filter :close_connection, :only => [:api_response]
 
   def close_connection 
-    $stderr.puts response.body
+    $stderr.puts "Response #{response.code} #{response.message}: #{response.body}"
     response.close
   end
 end
