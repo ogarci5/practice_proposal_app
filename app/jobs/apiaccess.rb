@@ -1,32 +1,28 @@
 #Example: /app/jobs/myjob.rb
 
-module MyJob
+module APIAccess
   @queue = :default
   def self.perform(response, authentication)
-   	puts "Doing my job"
+   	puts "Connecting to PM Mobile to update fields"
     require 'net/http'
     message = response.merge!(authentication)
-    header = {'X-CSRF-Token' => authentication[:authenticity_token]}
-    initheader = {'Content-Type' =>'application/json',
-          'Accept' =>'application/json'}
-    @host = 'localhost'
-    @port = '3000'
+    #header = {'X-CSRF-Token' => authentication[:authenticity_token]}
+    #@host = 'localhost'
+    #@port = '3000'
     uri = URI.parse("http://localhost:3000/responses")
-    @path = '/responses'
-
+    #@path = '/responses'
     @body = ActiveSupport::JSON.encode(message)
 
     puts @body
-    request = Net::HTTP::Post.new(@path, initheader = {'Content-Type' =>'application/json',
+    request = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json',
       'Accept' =>'application/json'})
     p request
     request.body = @body
-    p request.body
-    response = Net::HTTP.start(@host, @port) {|http| http.request(request) }
-    response = Net::HTTP.new(@host, @port).start do |http| 
+    #response = Net::HTTP.start(@host, @port) {|http| http.request(request) }
+    response = Net::HTTP.new(uri.host, uri.port).start do |http| 
       p http
       http.request(request) 
-  end
+    end
     #response = HTTParty.post('http://localhost:3000/responses', body: @body, headers: initheader)
     #puts response.body, response.code, response.message, response.headers.inspect
     #puts response.body if response.response_body_permitted?
@@ -49,9 +45,9 @@ module MyJob
       #else
     #  p response.value
     #end
-    p "Done"
     #puts response.body
     puts "Response #{response.code} #{response.message}: #{response.body}"
+    puts "Sucessfully updated proposal"
 =begin
       # Convert the parameters into JSON and set the content type as application/json
       req = Net::HTTP::Post.new(@path)
