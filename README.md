@@ -89,6 +89,7 @@ Add the `newrelic.yml` file provided by New Relic to `config/`
 Restart the server.
 Go to https://rpm.newrelic.com/accounts/349165/applications/2127803
 ####Ubuntu Redis Configuration
+Steps from http://redis.io/topics/quickstart
 Edit the init script:
 
 	$ nano /etc/init.d/redis_6379
