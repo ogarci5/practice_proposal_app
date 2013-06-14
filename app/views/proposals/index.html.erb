@@ -15,6 +15,11 @@
 						<td class="<%= r %>" > <%=proposal.id%></td>
 						<td class="<%= r %>" > <%=link_to proposal.name, proposal%></td>
 						<td class="<%= r %>" ><%=proposal.from%></td>
+						<td>
+							<% if reviewed?(proposal) == "read" %>
+								<i class="icon-ok"></i>
+							<% end %>
+						</td>
 					</div>
 				</tr>
 			<%end%>

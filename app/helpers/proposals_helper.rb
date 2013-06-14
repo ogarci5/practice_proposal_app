@@ -17,6 +17,14 @@ module ProposalsHelper
     end
   end
   
+  def finished?(proposal)
+    if reviewed?(proposal) == "read"
+      '<i class="icon-search"></i>'
+    else
+      proposal.reviewed && proposal.response_read
+    end
+  end
+  
   def num_unread_responses(current_user)
   	p = (Proposal.where(from: current_user.name ).find_all{|f| f.reviewed==true && f.response_read==false}).count
   	p>0 ? "(#{p})" : ""
