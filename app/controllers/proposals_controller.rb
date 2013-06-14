@@ -1,7 +1,6 @@
 class ProposalsController < ApplicationController
   def index
     @proposals = Proposal.where(:user_id => current_user.id)
-    #.find_all {|p| !p.responded?}
   end
   def responses
     @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| p.reviewed?}
@@ -11,6 +10,10 @@ class ProposalsController < ApplicationController
   end
   def show
     @proposal = Proposal.find(params[:id])
+    if @proposal.reviewed==true && @proposal.response_read==false
+      @proposal.response_read = true
+      @proposal.save
+    end
   end
   def show_response
     @proposal = Proposal.find(params[:id])

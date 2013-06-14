@@ -2,9 +2,11 @@ module ProposalsHelper
   def email_proposer(email, proposal)
     Resque.enqueue(MailGun, email, proposal)
   end
+  
   def unread_response?(proposal)
     return proposal.reviewed==true && proposal.response_read==false
   end
+  
   def reviewed?(proposal)
     if proposal.reviewed==true && proposal.response_read==false
       return "reviewed"
@@ -22,11 +24,7 @@ module ProposalsHelper
   
   def num_unreviewed_responses(current_user)
   	p = (Proposal.where(user_id: current_user.id ).find_all{|f| f.reviewed==false}).count
-  	if p>0
-  		return "(#{p})"
-    else
-      return ""
-    end
+  	p>0 ? "(#{p})" : ""
   end
   
 end

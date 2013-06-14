@@ -17,18 +17,9 @@ Start a Resque worker:
 
 You don't need to start Jenkins to run your app. To setup and start Jenkins, see app/doc/JENKINS_INSTALL.md 
 
-####New Relic
-Create an account on [New Relic](http://newrelic.com/).  
-Follow the steps outlined by New Relic.
-Add the new relic gem to the `Gemfile`:
-```ruby
-gem 'newrelic_rpm'
-```
-Install the new gem:
 
-	$ bundle install
-	
-Add the `newrelic.yml` file provided by New Relic to `config/`  
-Restart the server.
+#### New Relic
+
 Go to https://rpm.newrelic.com/accounts/349165/applications/2127803
 
+See app/doc/NEW_RELIC_SETUP.md for more info.
