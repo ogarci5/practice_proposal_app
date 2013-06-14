@@ -3,10 +3,10 @@ class ProposalsController < ApplicationController
     @proposals = Proposal.where(:user_id => current_user.id)
   end
   def responses
-    @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| p.responded?}
+    @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| p.reviewed?}
   end
   def pending_responses
-    @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| !p.responded?}
+    @proposals = Proposal.where(:user_id => current_user.id).find_all {|p| !p.reviewed?}
   end
   def show
     @proposal = Proposal.find(params[:id])
@@ -24,15 +24,6 @@ class ProposalsController < ApplicationController
     @user = User.find(params[:proposal][:user_id])
     @proposal = @user.proposals.new(name: params[:proposal][:name], 
     description: params[:proposal][:description], from: current_user.name, response: "")
-    p @proposal
-    p "@"
-    p "@"
-    p "@"
-    p "@"
-    p "@"
-    p "@"
-    p "@"
-    p "@"
     if @proposal.save
       redirect_to proposals_path
     end
@@ -50,7 +41,9 @@ class ProposalsController < ApplicationController
     message = params[:proposal].merge!(id: params[:id])
     authentication = {:authenticity_token => current_user.remember_token}
     Resque.enqueue(MyJob, message, authentication)
-    redirect_to proposals_path
+    @proposal.reviewed = true
+    @proposal.save
+    redirect_to respondant_path
     #@proposal.update_attributes(params[:proposal])
     #if @proposal.update_attributes(params[:proposal])
     #  authentication = {:authenticity_token => current_user.remember_token}

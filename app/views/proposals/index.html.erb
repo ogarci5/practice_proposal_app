@@ -4,13 +4,15 @@
     <div class="main">
 			<table>
 				<tr>
-					<th align="left">Name</th>
+					<th align="left">ID</th>
+					<th align="left">Proposal Name</th>
 					<th align="left">From</th>
 				</tr>
 			<% @proposals.each do |proposal|%>
 				<% r = reviewed?(proposal) %>
 				<tr>
 					<div >
+						<td class="<%= r %>" > <%=proposal.id%></td>
 						<td class="<%= r %>" > <%=link_to proposal.name, proposal%></td>
 						<td class="<%= r %>" ><%=proposal.from%></td>
 					</div>
