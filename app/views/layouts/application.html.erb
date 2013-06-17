@@ -9,10 +9,21 @@
 </head>
 <body>
   <div class="container">
+		<div id="header">
+			<%= link_to(image_tag("logo_app.png", {:alt => 'Proposal', :id => 'logo'}), "#{ActionController::Base.relative_url_root}/") %>
+		</div>
 		<% flash.each do |key, value| %>
 		  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
 		<% end %>
-    <%= yield %>
+		<div class="row">  
+		  <div class="span6 offset3">
+				<table class="table table-bordered">
+					<tr><td>
+    				<%= yield %>
+					</td></tr>
+				</table>
+  		</div>
+		</div>
   </div>
 </body>
 </html>

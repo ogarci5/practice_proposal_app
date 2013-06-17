@@ -1,13 +1,14 @@
-<h2>Welcome <%=current_user.nil? ? '' : current_user.name%></h2>
-<%if current_user.nil?%>
-  <%=link_to "Log in", login_path%>
-<%else%>
-  <%=link_to "Log out", logout_path, method: "delete"%><br>
-	<%=link_to "Create new proposal", new_proposal_path%><br>
-	<%=link_to "My proposals", proposals_path%>
-		<b><%= num_unread_responses(current_user) %></b><br>
-	<%=link_to "To be responded to", respondant_path%>
-		<b><%= num_unreviewed_responses(current_user) %></b><br>
-	<%=link_to "Send Mail", "/mailgun"%>
-	
-<%end%> 
+<h4 class="center">Welcome <%=current_user.nil? ? '' : current_user.name%></h4>
+<div class="main">
+  <table>
+    <%if current_user.nil?%>
+	    <tr><td><%=link_to "Log in", login_path%></td></tr>
+	  <%else%>
+	    <tr><td><%=link_to "Log out", logout_path, method: "delete"%></td></tr>
+			<tr><td><%=link_to "Create new proposal", new_proposal_path%></td></tr>
+			<tr><td><%=link_to "My proposals", proposals_path%></td></tr>
+			<tr><td><%=link_to "To be responded to", respondant_path%>
+			<b><%= num_unreviewed_responses(current_user) %></b></td></tr>
+  	<%end%> 
+  </table>
+</div>
