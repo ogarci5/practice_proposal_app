@@ -23,8 +23,8 @@ body {
 }
 .row table.table-bordered {
   background-color:#fff;
-  tr td div.main {
-    border-left:white solid 0;
+  tr td tr, tr td th, tr td td {
+    border:white solid 0;
   }
 }
 .form {
@@ -39,9 +39,12 @@ body {
   .btn-group {
 	width:100%;
   }
-  a {
-	padding-left:0;
-	padding-right:0;
+  #abtn {
+	width:100%;
+	display:block;
+	a.btn {
+		width:100%;
+	}
   }
   select {
   	width: 99%;
