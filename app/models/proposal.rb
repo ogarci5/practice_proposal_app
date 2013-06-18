@@ -12,10 +12,11 @@
 
 class Proposal < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :response, :description, :from, :name, :user_id, :response_read , :reviewed
+  attr_accessible :description, :name
   
   validates :name, presence: true, length: { minimum: 3, maximum: 40}
   validates :user_id, presence: true, numericality: { only_integer: true }
+  validates :description, presence: true, length: { minimum: 3 }
   
   # Have Proposal.all be ordered by default
   default_scope order('created_at DESC')

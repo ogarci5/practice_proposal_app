@@ -20,12 +20,7 @@ describe Proposal do
   
   it { should respond_to(:name) }
   it { should respond_to(:description) }
-  it { should respond_to(:from) }
   it { should respond_to(:user_id) }
-  it { should respond_to(:response) }
-  it { should respond_to(:name) }
-  it { should respond_to(:response_read) }
-  it { should respond_to(:reviewed) }
   
   it { should be_valid }
   
@@ -35,30 +30,33 @@ describe Proposal do
   end
   
   describe "when name is too short" do
-    before { proposal.name = "hi" }
+    before { proposal.name = "xx" }
     it { should_not be_valid }
   end
   
-  describe "when name is too long" do
+  describe "when name is too long " do
     before { proposal.name = "x"*41 }
     it { should_not be_valid }
   end
   
   describe "when user_id is not present" do
-    before { proposal.user_id = nil }
+    before { proposal.user_id = " " }
     it { should_not be_valid }
   end
   
-  describe "when user_id is not an integer, but is a string" do
-    before { proposal.user_id = "sdf" }
-    it { should_not be_valid}
+  describe "when user_id is not an integer" do
+    before { proposal.user_id = "xxx"}
+    it { should_not be_kind_of(Integer) }
   end
   
-  describe "when user_id is not an integer, but is a float" do
-    before { proposal.user_id = 3.1 }
+  describe "when description is not present" do
+    before { proposal.description = " " }
     it { should_not be_valid }
   end
-
   
-
+  describe "when description is too short" do
+    before { proposal.description = "aa" }
+    it { should_not be_valid }
+  end
+  
 end

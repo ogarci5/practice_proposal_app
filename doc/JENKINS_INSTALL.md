@@ -35,6 +35,11 @@ Add to Rakefile:
 
 FOR MORE INFO: http://caldersphere.rubyforge.org/ci_reporter/
 
+
+##### Make sure you don't have any outstanding migrations. To migrate the test database, do this from the Rails folder on the machine running Jenkins:
+
+	$ bundle exec rake environment RAILS_ENV=test db:migrate
+
 ##### To create the build:
 
 Go to Configure > Build > Execute Shell > Command, and paste the following:
