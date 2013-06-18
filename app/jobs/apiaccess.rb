@@ -9,7 +9,7 @@ module APIAccess
     #header = {'X-CSRF-Token' => authentication[:authenticity_token]}
     #@host = 'localhost'
     #@port = '3000'
-    uri = URI.parse("http://localhost:3000/responses")
+    uri = URI.parse("http://localhost:3000/api")
     #@path = '/responses'
     @body = ActiveSupport::JSON.encode(message)
 

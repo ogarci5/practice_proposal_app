@@ -6,11 +6,12 @@ class ApiController < ApplicationController
   def api_response
     require 'net/http'
     puts params
-    @proposal = Proposal.find(params[:id])
+    @response = Response.find(params[:id])
+    proposal = @response.proposal
     authenticated = !User.find_by_remember_token(params[:authenticity_token]).nil?
-    @user = User.find_by_name(@proposal.from)
+    @user = User.find(proposal.from_user.id)
     if authenticated
-      @proposal.update_attributes(response: params[:response])
+      @response.update_attributes(body: params[:body])
       # email_proposer(@user.email, @proposal)
     end
     respond_with(params, :status => 200)

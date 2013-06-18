@@ -30,6 +30,15 @@ body {
 .form {
   width:$gridColumnWidth * 4 ;
   margin: 0 auto;
+	#error_explanation {
+		width:100%;
+		padding:0;
+		margin-top:20px;
+		margin-right:0;
+	}
+	.field_with_errors {
+		margin-bottom:0;
+	}
   input, textarea {
     width: 93%;
   }
@@ -63,6 +72,6 @@ body {
 	width: 100%;
   }
   .tabbable {
-	margin-top:10px;
+	argin-top:10px;
   }
 }

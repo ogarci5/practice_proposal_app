@@ -1,7 +1,8 @@
 <h4 class="center">New Proposal</h4>
 <div class="form">
-<%= form_for(:proposal, url: proposals_path) do |f|%>
+<%= form_for(@proposal) do |f|%>
   <div>
+		<%= render 'shared/error_messages' %>
     <%= f.label :name %>
     <%= f.text_field :name %>
 
