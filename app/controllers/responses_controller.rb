@@ -8,10 +8,10 @@ class ResponsesController < ApplicationController
     @proposal = @reponse.proposal
   end
   def update
-    @response = Response.find(params[:id])
-    if @response.update_attributes(params[:response])
-      redirect_to responses_path+"?sent=true"
-    end
+    message = params[:response].merge!(id: params[:id])
+    authentication = {:authenticity_token => current_user.remember_token}
+    Resque.enqueue(APIAccess, message, authentication)
+    redirect_to responses_path+"?sent=true"
   end
   def edit
     @response = Response.find(params[:id])

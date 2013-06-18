@@ -20,16 +20,18 @@ class ProposalsController < ApplicationController
       @response.read = false
       @response.save
       redirect_to proposals_path
+    else
+      render 'new'
     end
   end
   def new
     @proposal = Proposal.new
     @user = User.all
   end
-  def update
-    message = params[:proposal].merge!(id: params[:id])
-    authentication = {:authenticity_token => current_user.remember_token}
-    Resque.enqueue(APIAccess, message, authentication)
-    redirect_to respondant_path
-  end
+  #def update
+  #  message = params[:proposal].merge!(id: params[:id])
+  #  authentication = {:authenticity_token => current_user.remember_token}
+  #  Resque.enqueue(APIAccess, message, authentication)
+  #  redirect_to respondant_path
+  #end
 end
