@@ -1,24 +1,20 @@
 class ResponsesController < ApplicationController
-  skip_before_filter  :verify_authenticity_token
-  respond_to :html, :json
-  include ProposalsHelper
-  
-  def api_response
-    require 'net/http'
-    puts params
-    @proposal = Proposal.find(params[:id])
-    authenticated = !User.find_by_remember_token(params[:authenticity_token]).nil?
-    @user = User.find_by_name(@proposal.from)
-    if authenticated
-      @proposal.update_attributes(response: params[:response])
-      # email_proposer(@user.email, @proposal)
-    end
-    respond_with(params, :status => 200)
+  def index
+    @received = Proposal.where(:user_id => current_user.id).find_all {|p| p.reviewed? && p.response}
+    @sent = Proposal.all.find_all {|p| p.reviewed? && p.to_user.id == current_user.id}
   end
-  after_filter :close_connection, :only => [:api_response]
-
-  def close_connection 
-    $stderr.puts "Response #{response.code} #{response.message}: #{response.body}"
-    response.close
+  def show
+    @response = Response.find(params[:id])
+    @proposal = @reponse.proposal
+  end
+  def update
+    @response = Response.find(params[:id])
+    if @response.update_attributes(params[:response])
+      redirect_to responses_path+"?sent=true"
+    end
+  end
+  def edit
+    @response = Response.find(params[:id])
+    @proposal = @response.proposal
   end
 end

@@ -3,10 +3,30 @@
 
 
 /* General styles */
+body {
+	background-repeat: no-repeat;
+	background-attachment: left top;
+	background-size:100% 65px;
+}
 .center {
   text-align:center;
+  margin-top:0;
+  margin-bottom:0;
 }
-
+#header {
+  #logo {
+	display:block;
+	margin:0 auto;
+	margin-top:5px;
+	margin-bottom:15px;
+  }
+}
+.row table.table-bordered {
+  background-color:#fff;
+  tr td tr, tr td th, tr td td {
+    border:white solid 0;
+  }
+}
 .form {
   width:$gridColumnWidth * 4 ;
   margin: 0 auto;
@@ -16,8 +36,15 @@
   .btn {
   	width: 100%;
   }
-  a {
-	  padding:4px 0;
+  .btn-group {
+	width:100%;
+  }
+  #abtn {
+	width:100%;
+	display:block;
+	a.btn {
+		width:100%;
+	}
   }
   select {
   	width: 99%;
@@ -34,5 +61,8 @@
   table, tr {
 	text-align:left;
 	width: 100%;
+  }
+  .tabbable {
+	margin-top:10px;
   }
 }
