@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
   skip_before_filter :require_login
   def index
-    @received_responses = []
-    @receoved_proposals = []
-    if !current_user.nil?
+    if current_user
     @received_responses = Proposal.where(:user_id => current_user.id).find_all { |p| 
       response = p.response
       p.reviewed? && !response.read

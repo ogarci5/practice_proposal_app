@@ -24,10 +24,10 @@
 	            <%=link_to "Home", root_path%>
 	          </li>
 	          <li class="">
-	            <%=link_to "My Proposals", proposals_path%>
+	            <a href="/proposals">My Proposals <span id="proposal-count" class="label label-inform"></span></a>
 	          </li>
 	          <li class="">
-	            <%=link_to "My Responses", responses_path%>
+	            <a href="/responses">My Responses <span id="response-count" class="label label-inform"></span></a>
 	          </li>
 	          <li class="">
 	            <%=link_to "Log Out", logout_path, method: "delete"%>
@@ -42,7 +42,6 @@
 	    </div>
 	  </div>
 	</div>
-	
   <div class="container">
 		<% flash.each do |key, value| %>
 		  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
@@ -59,3 +58,11 @@
   </div>
 </body>
 </html>
+<script>
+$(getUpdate);
+function getUpdate(){
+  $("#proposal-count").load("/_count");
+  $("#response-count").load("/_count?response=true");
+  setTimeout(getUpdate,15000);
+}
+</script>

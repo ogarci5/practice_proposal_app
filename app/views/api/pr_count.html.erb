@@ -1,0 +1,5 @@
+<%if params[:response]%>
+	<%=@received_responses != 0 ? @received_responses : ''%>
+<%else%>
+	<%=@received_proposals != 0 ? @received_proposals : ''%>
+<%end%>
