@@ -8,10 +8,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="navbar-inner">
+	    <div class="container">
+	      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <%=link_to "Proposal Mobile", root_path, class:"brand"%>
+	      <div class="nav-collapse in collapse" style="height: auto;">
+	        <ul class="nav">
+	          <li class="">
+	            <%=link_to "Home", root_path%>
+	          </li>
+	          <li class="">
+	            <%=link_to "My Proposals", proposals_path%>
+	          </li>
+	          <li class="">
+	            <%=link_to "My Responses", responses_path%>
+	          </li>
+	          <li class="">
+	            <%=link_to "Log Out", logout_path%>
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
   <div class="container">
-		<div id="header">
-			<%= link_to(image_tag("logo_app.png", {:alt => 'Proposal', :id => 'logo'}), "#{ActionController::Base.relative_url_root}/") %>
-		</div>
 		<% flash.each do |key, value| %>
 		  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
 		<% end %>

@@ -7,6 +7,18 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: left top;
 	background-size:100% 65px;
+	div.container.content {
+		padding-top:40px;
+	}
+}
+.navbar-fixed-top:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 .center {
   text-align:center;
@@ -21,8 +33,15 @@ body {
 	margin-bottom:15px;
   }
 }
+.label-inform {
+	background-color:#A60004;
+}
 .row table.table-bordered {
   background-color:#fff;
+	box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.15);
+	-moz-box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.15);
+	-webkit-box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.15);
+	-ms-box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.15);
   tr td tr, tr td th, tr td td {
     border:white solid 0;
   }

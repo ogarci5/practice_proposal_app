@@ -8,12 +8,12 @@
 			<tr><td><%=link_to "New proposal", new_proposal_path%></td></tr>
 			<tr><td><%=link_to "My proposals", proposals_path%>
 				<%if @received_proposals > 0%>
-				<span class="label label-success"><%=@received_proposals%></span>
+				<span class="label label-inform"><%=@received_proposals%></span>
 				<%end%>
 			</td></tr>
 			<tr><td><%=link_to "My responses", responses_path%>
 				<%if @received_responses > 0%>
-				<span class="label label-success"><%=@received_responses%></span>
+				<span class="label label-inform"><%=@received_responses%></span>
 				<%end%>
 			</td></tr>
   	<%end%> 
