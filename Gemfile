@@ -17,6 +17,9 @@ gem 'httparty'
 gem 'rest-client'
 gem 'multimap'
 
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.0.0'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -31,6 +34,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
+  gem 'factory_girl_rails', '4.1.0'
 end
 
 group :test do
@@ -39,8 +43,11 @@ group :test do
   gem 'ci_reporter'
 end
 
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+group :development do
+  gem 'annotate', '2.5.0'
+end
+
+
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
