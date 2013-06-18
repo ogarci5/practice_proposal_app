@@ -10,7 +10,7 @@ Run redis server:
 
 Start a Resque worker:
 
-	$ QUEUE=*  
+	$ QUEUE=*  rake resque:work
 
 
 ####Jenkins

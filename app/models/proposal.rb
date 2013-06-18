@@ -2,16 +2,12 @@
 #
 # Table name: proposals
 #
-#  id            :integer          not null, primary key
-#  name          :string(255)
-#  description   :text
-#  from          :string(255)
-#  user_id       :integer
-#  response      :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  response_read :boolean          default(FALSE)
-#  reviewed      :boolean          default(FALSE)
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class Proposal < ActiveRecord::Base

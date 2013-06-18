@@ -23,3 +23,9 @@ dump.rdb*
 # ignore files created by Bundler during gem install
 Gemfile.lock
 Gemfile.orig
+
+# ignore temp files created by kdiff3
+*.rb.BACKUP.*
+*.rb.BASE.*
+*.rb.REMOTE.*
+*.rb.orig*

@@ -9,6 +9,7 @@
 #  updated_at      :datetime         not null
 #  remember_token  :string(255)
 #  password_digest :string(255)
+#  username        :string(255)
 #
 
 require 'spec_helper'
@@ -16,27 +17,81 @@ require 'spec_helper'
 describe User do
  
   let(:user) { FactoryGirl.create(:user) }
-  
+
   subject { user }
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:password_digest) }
+  it { should respond_to(:username)}
 
   it { should be_valid }
   
-  describe "when email address is not unique" do
-    before do
-      @user_with_same_email = user.dup              # NOTE: must be @ varialble to use in 'it' block
-      @user_with_same_email.email = user.email.upcase
-    end
-    
-    # re the following test: the index on :email enforces uniqueness at the database level. THis
-    # is necessesary b/c the uniqueness validation can fail in the case of two new records 
-    # created in rapid succession. So: if a record with a duplicate email is saved, then an
-    # error will be thrown before rspec gets a chance to validate it, hence the odd construction 
-    # of the following 'it' block. 
-    it { lambda { @user_with_same_email.save }.should raise_error }
+  describe "when username is not present" do
+    before { user.username = " " }
+    it { should_not be_valid }
   end
+  
+  describe "when username is too short" do
+    before { user.username = "aa" }
+    it { should_not be_valid }
+  end
+  
+  describe "when username is too long " do
+    before { user.username = "x"*51 }
+    it { should_not be_valid }
+  end
+  
+  describe "when username is not unique" do
+    before do
+      @user2 = user.dup
+      @user2.username = user.username
+      @user2.save
+    end
+
+    specify { @user2.should_not be_valid }
+  end
+  
+  describe "when name is not present" do
+    before { user.name = " " }
+    it { should_not be_valid }
+  end
+  
+  describe "when name is too short" do
+    before { user.name = "aa" }
+    it { should_not be_valid }
+  end
+  
+  describe "when name is too long " do
+    before { user.name = "x"*51 }
+    it { should_not be_valid }
+  end
+  
+  describe "when email is not present" do
+    before { user.email = " " }
+    it { should_not be_valid }
+  end
+  
+  describe "when email address is already taken" do
+    before do
+      @user2 = user.dup
+      @user2.email = user.email.upcase
+      @user2.save
+    end
+
+    specify { @user2.should_not be_valid }
+  end
+  
+  describe "when email format is invalid" do
+    it "should be invalid" do
+      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
+                     foo@bar_baz.com foo@bar+baz.com]
+      addresses.each do |invalid_address|
+        user.email = invalid_address
+        user.should_not be_valid
+      end      
+    end
+    ends
+  
 end
