@@ -1,12 +1,12 @@
-<h4 class="center">My Proposals</h4>
+<h4 class="center">Responses</h4>
 <div class="main">
 	<div class="tabbable">
 	  <ul class="nav nav-tabs">
-	    <li class="active"><a href="#tab1" data-toggle="tab">Received</a></li>
-	    <li><a href="#tab2" data-toggle="tab">Sent</a></li>
+	    <li class="<%= params[:sent] == "true" ? '' : 'active'%>"><a href="#tab1" data-toggle="tab">Received</a></li>
+	    <li class="<%= params[:sent] == "true" ? 'active' : ''%>"><a href="#tab2" data-toggle="tab">Sent</a></li>
 	  </ul>
 	  <div class="tab-content">
-	    <div class="tab-pane active" id="tab1">
+	    <div class="tab-pane <%= params[:sent] == "true" ? '' : 'active'%>" id="tab1">
 				<table>
 					<tr>
 						<th align="left">ID</th>
@@ -15,16 +15,21 @@
 					</tr>
 				<% @received.each do |proposal|%>
 					<tr>
-						<div >
+						<div>
 							<td><%=proposal.id%></td>
-							<td><%=link_to proposal.name, edit_response_path(proposal.response)%></td>
-							<td><%=proposal.from_user.name%></td>
+							<td><%=link_to proposal.name, proposal%></td>
+							<td><%=proposal.to_user.name%></td>
+							<td>
+								<% if !proposal.read %>
+									<i class="icon-exclamation-sign"></i>
+								<% end %>
+							</td>
 						</div>
 					</tr>
 				<%end%>
 			</table>
 	    </div>
-	    <div class="tab-pane" id="tab2">
+	    <div class="tab-pane <%= params[:sent] == "true" ? 'active' : ''%>" id="tab2">
 				<table>
 					<tr>
 						<th align="left">ID</th>
@@ -36,7 +41,7 @@
 						<div>
 							<td><%=proposal.id%></td>
 							<td><%=link_to proposal.name, proposal%></td>
-							<td><%=proposal.to_user.name%></td>
+							<td><%=proposal.from_user.name%></td>
 						</div>
 					</tr>
 				<%end%>
@@ -44,7 +49,6 @@
 	    </div>
 	  </div>
 	</div>
-	<br/>
 	<div class="btn-group">
 		<%=link_to "Home", root_path, class: "btn"%>
 	</div>

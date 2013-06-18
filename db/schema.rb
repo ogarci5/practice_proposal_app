@@ -11,21 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613201653) do
+ActiveRecord::Schema.define(:version => 20130618023107) do
 
   create_table "proposals", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "from"
     t.integer  "user_id"
-    t.text     "response"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.boolean  "response_read", :default => false
-    t.boolean  "reviewed",      :default => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "proposals", ["user_id"], :name => "index_proposals_on_user_id"
+
+  create_table "responses", :force => true do |t|
+    t.text     "body"
+    t.integer  "proposal_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "read",        :default => false
+  end
+
+  add_index "responses", ["proposal_id"], :name => "index_responses_on_proposal_id"
+  add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -34,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20130613201653) do
     t.datetime "updated_at",      :null => false
     t.string   "remember_token"
     t.string   "password_digest"
+    t.string   "username"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

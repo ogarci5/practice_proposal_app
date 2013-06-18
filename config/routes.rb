@@ -3,13 +3,11 @@ PracticeProposalApp::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :proposals
+  resources :responses
 
   match "/login", to: "sessions#new"
   match "/logout", to: 'sessions#destroy', via: :delete
-  match "/responses", to: 'responses#api_response', via: :post    # lists proposals which user needs to respond to
-  match "/respons", to: 'proposals#show_response'                 # shows the sender a response
-  match "/respondant", to: 'proposals#pending_responses'          
-  match "/respond", to: 'proposals#respond_to_proposal'
+  match "/api", to: 'api#api_response', via: :post
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
