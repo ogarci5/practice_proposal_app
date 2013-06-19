@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
   private
 
     def require_login
+      if !User.find_by_remember_token(params[:authenticity_token]).nil?
+        user = User.find_by_remember_token(params[:authenticity_token])
+        sign_in(user)
+      end
       unless current_user
         redirect_to login_path
       end
