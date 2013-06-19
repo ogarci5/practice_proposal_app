@@ -19,46 +19,34 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ProposalsController do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Soa::Proposal. As you add validations to Soa::Proposal, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes 
-    {
-      name:              "This is a sample",
-      description:       "Description: I would like to lower the price to $1.00",
-      user_id:           1
-    }
-  end
+=begin
+  subject { page }
   
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ProposalsController. Be sure to keep this updated too.
-  def valid_session
-    {}
+  let(:user) { FactoryGirl.create(:user) }
+  before do 
+    visit login_path
+    valid_login(user)
   end
 
-  it "should create a new instance given valid attributes" do
-    FactoryGirl.create(:proposal)
-  end
+
+  #it "should create a new instance given valid attributes" do
+  #  FactoryGirl.create(:proposal)
+  #end
 
   describe "GET show" do
     it "assigns the requested proposal as @proposal" do
       proposal = FactoryGirl.create(:proposal)
       response = FactoryGirl.create(:response)
+      proposal.user_id = user.id
       response.proposal_id = proposal.id
       response.user_id = proposal.user_id
       proposal.response = response
-      
-      #p proposal.response
       
       get :show, {:id => proposal.to_param}
       assigns(:proposal).should eq(proposal)
     end
   end
 
-=begin
   describe "GET index" do
     it "assigns all soa_proposals as @soa_proposals" do
       proposal = Soa::Proposal.create! valid_attributes
