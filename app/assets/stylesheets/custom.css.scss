@@ -7,18 +7,16 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: left top;
 	background-size:100% 65px;
+	padding:0;
 	div.container.content {
 		padding-top:40px;
 	}
 }
-.navbar-fixed-top:after {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+.navbar-inner {
+	border-radius:0;
+	.nav li {
+		white-space:nowrap;
+	}
 }
 .center {
   text-align:center;

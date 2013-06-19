@@ -8,4 +8,13 @@ class ApplicationController < ActionController::Base
     sign_out
     super
   end
+  before_filter :require_login
+
+  private
+
+    def require_login
+      unless current_user
+        redirect_to login_path
+      end
+    end
 end

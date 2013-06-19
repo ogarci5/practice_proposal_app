@@ -8,6 +8,7 @@ PracticeProposalApp::Application.routes.draw do
   match "/login", to: "sessions#new"
   match "/logout", to: 'sessions#destroy', via: :delete
   match "/api", to: 'api#api_response', via: :post
+  match "/_count", to: 'api#pr_count', via: :get
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

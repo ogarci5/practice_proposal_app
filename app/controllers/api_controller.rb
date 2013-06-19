@@ -18,6 +18,17 @@ class ApiController < ApplicationController
   end
   after_filter :close_connection, :only => [:api_response]
 
+  def pr_count
+    if current_user
+      @received_responses = Proposal.where(:user_id => current_user.id).find_all { |p| 
+        response = p.response
+        p.reviewed? && !response.read
+      }.count
+      @received_proposals = Proposal.all.find_all {|p| !p.reviewed? && p.to_user.id == current_user.id}.count
+      render :layout => false
+    end
+  end
+
   def close_connection 
     $stderr.puts "Response #{response.code} #{response.message}: #{response.body}"
     response.close
