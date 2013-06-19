@@ -40,7 +40,22 @@ describe ProposalsController do
   end
 
   it "should create a new instance given valid attributes" do
-    pr = FactoryGirl.create(:proposal)
+    FactoryGirl.create(:proposal)
+  end
+
+  describe "GET show" do
+    it "assigns the requested proposal as @proposal" do
+      proposal = FactoryGirl.create(:proposal)
+      response = FactoryGirl.create(:response)
+      response.proposal_id = proposal.id
+      response.user_id = proposal.user_id
+      proposal.response = response
+      
+      #p proposal.response
+      
+      get :show, {:id => proposal.to_param}
+      assigns(:proposal).should eq(proposal)
+    end
   end
 
 =begin
@@ -51,6 +66,7 @@ describe ProposalsController do
       assigns(:soa_proposals).should eq([proposal])
     end
   end
+
 
   describe "GET show" do
     it "assigns the requested soa_proposal as @soa_proposal" do
