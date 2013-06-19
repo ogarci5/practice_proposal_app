@@ -19,14 +19,14 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ProposalsController do
-=begin
+
   subject { page }
   
   let(:user) { FactoryGirl.create(:user) }
-  before do 
-    visit login_path
-    valid_login(user)
-  end
+  #before do 
+  #  visit login_path
+  #  valid_login(user)
+  #end
 
 
   #it "should create a new instance given valid attributes" do
@@ -38,15 +38,17 @@ describe ProposalsController do
       proposal = FactoryGirl.create(:proposal)
       response = FactoryGirl.create(:response)
       proposal.user_id = user.id
+      proposal.save
       response.proposal_id = proposal.id
       response.user_id = proposal.user_id
+      respone.save
       proposal.response = response
       
-      get :show, {:id => proposal.to_param}
+      get :show, {:id => proposal.to_param, :authenticity_token => user.remember_token}
       assigns(:proposal).should eq(proposal)
     end
   end
-
+=begin
   describe "GET index" do
     it "assigns all soa_proposals as @soa_proposals" do
       proposal = Soa::Proposal.create! valid_attributes
