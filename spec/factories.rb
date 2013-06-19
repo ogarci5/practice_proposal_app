@@ -9,16 +9,17 @@ FactoryGirl.define do
     password          "123456"
   end
   
-  factory :user2 do
-    name              "John Doe"
-    email             "John@Doe.com"
-    username          "jdoe"
-    password          "123456"
-  end
-  
   factory :proposal do
     name              "This is a sample"
     description       "Description: I would like to lower the price to $1.00"
     user_id           1
+  end
+  
+  
+  factory :response do
+    body              "This is the response body"
+    proposal_id       nil
+    user_id           nil
+    read              false
   end
 end
