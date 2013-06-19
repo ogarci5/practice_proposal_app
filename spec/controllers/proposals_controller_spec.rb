@@ -19,12 +19,11 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ProposalsController do
-
-  subject { page }
   
   let(:user) { FactoryGirl.create(:user) }
   let(:proposal) {FactoryGirl.create(:proposal)}
   let(:response) {FactoryGirl.create(:response)}
+  let(:valid_attributes) {{name: proposal.name, description: proposal.description}}
   # Proposal and response creation
   before do
     proposal.user_id = user.id
@@ -32,10 +31,6 @@ describe ProposalsController do
     response.proposal_id = proposal.id
     response.user_id = proposal.user_id
     response.save
-  end
-  
-  def valid_attributes 
-    {name: proposal.name, description: proposal.description}
   end
 
   describe "GET show" do
@@ -66,28 +61,27 @@ describe ProposalsController do
       assigns(:users).should eq(User.all)
     end
   end
-
+  
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Proposal" do
         expect {
-          post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
-            :response => user.id}
+          post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token,
+            :response => {:user_id => user.id}}
         }.to change(Proposal, :count).by(1)
       end
 
       it "assigns a newly created proposal as @proposal" do
         post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
-            :response => user.id}
-        assigns(:proposal).should be_a(proposal)
+            :response => {:user_id => user.id}}
+        assigns(:proposal).should be_a(Proposal)
         assigns(:proposal).should be_persisted
       end
 
       it "redirects to proposals index" do
         post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
-          :response => user.id}
-        response.should redirect_to proposals_paths
-      end
+          :response => {:user_id => user.id}}
+        response.should redirect_to proposals_path      end
     end
 
     describe "with invalid params" do
