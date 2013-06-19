@@ -23,101 +23,90 @@ describe ProposalsController do
   subject { page }
   
   let(:user) { FactoryGirl.create(:user) }
-  #before do 
-  #  visit login_path
-  #  valid_login(user)
-  #end
-
-
-  #it "should create a new instance given valid attributes" do
-  #  FactoryGirl.create(:proposal)
-  #end
+  let(:proposal) {FactoryGirl.create(:proposal)}
+  let(:response) {FactoryGirl.create(:response)}
+  # Proposal and response creation
+  before do
+    proposal.user_id = user.id
+    proposal.save
+    response.proposal_id = proposal.id
+    response.user_id = proposal.user_id
+    response.save
+  end
+  
+  def valid_attributes 
+    {name: proposal.name, description: proposal.description}
+  end
 
   describe "GET show" do
     it "assigns the requested proposal as @proposal" do
-      proposal = FactoryGirl.create(:proposal)
-      response = FactoryGirl.create(:response)
-      proposal.user_id = user.id
-      proposal.save
-      response.proposal_id = proposal.id
-      response.user_id = proposal.user_id
-      respone.save
-      proposal.response = response
-      
       get :show, {:id => proposal.to_param, :authenticity_token => user.remember_token}
       assigns(:proposal).should eq(proposal)
     end
   end
-=begin
+
   describe "GET index" do
-    it "assigns all soa_proposals as @soa_proposals" do
-      proposal = Soa::Proposal.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:soa_proposals).should eq([proposal])
+    it "assigns all sent proposals as @sent" do
+      get :index, {:authenticity_token => user.remember_token}
+      assigns(:sent).should eq(Proposal.where(:user_id => user.id).find_all {|p| !p.reviewed?})
+    end
+    it "assigns all received proposals as @received" do
+      get :index, {:authenticity_token => user.remember_token}
+      assigns(:received).should eq(Proposal.all.find_all {|p| !p.reviewed? && p.to_user.id == user.id})
     end
   end
-
-
-  describe "GET show" do
-    it "assigns the requested soa_proposal as @soa_proposal" do
-      proposal = Soa::Proposal.create! valid_attributes
-      get :show, {:id => proposal.to_param}, valid_session
-      assigns(:soa_proposal).should eq(proposal)
-    end
-  end
-
+  
   describe "GET new" do
-    it "assigns a new soa_proposal as @soa_proposal" do
-      get :new, {}, valid_session
-      assigns(:soa_proposal).should be_a_new(Soa::Proposal)
+    it "assigns a new proposal as @proposal" do
+      get :new, {:authenticity_token => user.remember_token}
+      assigns(:proposal).should be_a_new(Proposal)
     end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested soa_proposal as @soa_proposal" do
-      proposal = Soa::Proposal.create! valid_attributes
-      get :edit, {:id => proposal.to_param}, valid_session
-      assigns(:soa_proposal).should eq(proposal)
+    it "assigns all users as @users" do
+      get :new, {:authenticity_token => user.remember_token}
+      assigns(:users).should eq(User.all)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new Soa::Proposal" do
+      it "creates a new Proposal" do
         expect {
-          post :create, {:soa_proposal => valid_attributes}, valid_session
-        }.to change(Soa::Proposal, :count).by(1)
+          post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
+            :response => user.id}
+        }.to change(Proposal, :count).by(1)
       end
 
-      it "assigns a newly created soa_proposal as @soa_proposal" do
-        post :create, {:soa_proposal => valid_attributes}, valid_session
-        assigns(:soa_proposal).should be_a(Soa::Proposal)
-        assigns(:soa_proposal).should be_persisted
+      it "assigns a newly created proposal as @proposal" do
+        post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
+            :response => user.id}
+        assigns(:proposal).should be_a(proposal)
+        assigns(:proposal).should be_persisted
       end
 
-      it "redirects to the created soa_proposal" do
-        post :create, {:soa_proposal => valid_attributes}, valid_session
-        response.should redirect_to(Soa::Proposal.last)
+      it "redirects to proposals index" do
+        post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
+          :response => user.id}
+        response.should redirect_to proposals_paths
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved soa_proposal as @soa_proposal" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Soa::Proposal.any_instance.stub(:save).and_return(false)
-        post :create, {:soa_proposal => {}}, valid_session
-        assigns(:soa_proposal).should be_a_new(Soa::Proposal)
+        Proposal.any_instance.stub(:save).and_return(false)
+        post :create, {:proposal => {}, :authenticity_token => user.remember_token}
+        assigns(:proposal).should be_a_new(Proposal)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Soa::Proposal.any_instance.stub(:save).and_return(false)
-        post :create, {:soa_proposal => {}}, valid_session
+        Proposal.any_instance.stub(:save).and_return(false)
+        post :create, {:proposal => {}, :authenticity_token => user.remember_token}
         response.should render_template("new")
       end
     end
   end
-
+=begin
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested soa_proposal" do

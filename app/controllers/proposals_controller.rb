@@ -26,7 +26,7 @@ class ProposalsController < ApplicationController
   end
   def new
     @proposal = Proposal.new
-    @user = User.all
+    @users = User.all
   end
   #def update
   #  message = params[:proposal].merge!(id: params[:id])
