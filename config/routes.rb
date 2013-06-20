@@ -1,4 +1,6 @@
 PracticeProposalApp::Application.routes.draw do
+  require 'resque/server'
+
   root to: "home#index"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
@@ -9,7 +11,9 @@ PracticeProposalApp::Application.routes.draw do
   match "/logout", to: 'sessions#destroy', via: :delete
   match "/api", to: 'api#api_response', via: :post
   match "/_count", to: 'api#pr_count', via: :get
-  
+
+  mount Resque::Server.new, :at => "/resque"  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

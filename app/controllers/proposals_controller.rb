@@ -1,3 +1,4 @@
+require "proposals_controller"
 class ProposalsController < ApplicationController
   def index
     @sent = Proposal.where(:user_id => current_user.id).find_all {|p| !p.reviewed?}

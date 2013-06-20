@@ -19,12 +19,11 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ProposalsController do
-
-  subject { page }
   
   let(:user) { FactoryGirl.create(:user) }
   let(:proposal) {FactoryGirl.create(:proposal)}
   let(:response) {FactoryGirl.create(:response)}
+  let(:valid_attributes) {{name: proposal.name, description: proposal.description}}
   # Proposal and response creation
   before do
     proposal.user_id = user.id
@@ -32,10 +31,6 @@ describe ProposalsController do
     response.proposal_id = proposal.id
     response.user_id = proposal.user_id
     response.save
-  end
-  
-  def valid_attributes 
-    {name: proposal.name, description: proposal.description}
   end
 
   describe "GET show" do
@@ -66,28 +61,56 @@ describe ProposalsController do
       assigns(:users).should eq(User.all)
     end
   end
-
+  
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Proposal" do
         expect {
-          post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
-            :response => user.id}
+          post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token,
+            :response => {:user_id => user.id}}
         }.to change(Proposal, :count).by(1)
       end
-
+      
+      it "creates a proposal that has a relationship with current_user" do
+        post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token,
+          :response => {:user_id => user.id}}
+        proposal = assigns(:proposal)
+        proposal.user.should eq(user)
+      end
+      
+      it "creates a new Response" do
+        expect {
+          post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token,
+            :response => {:user_id => user.id}}
+          }.to change(Response, :count).by(1)
+      end
+      
+      it "creates a response that has a relationship with the proposal" do
+        post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token,
+          :response => {:user_id => user.id}}
+        proposal = assigns(:proposal)
+        response = assigns(:response)
+        response.proposal.should eq(proposal)
+      end
+      
+      it "creates a response that has a relationship with current_user" do
+        post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token,
+          :response => {:user_id => user.id}}
+        response = assigns(:response)
+        response.user.should eq(user)
+      end
+      
       it "assigns a newly created proposal as @proposal" do
         post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
-            :response => user.id}
-        assigns(:proposal).should be_a(proposal)
+            :response => {:user_id => user.id}}
+        assigns(:proposal).should be_a(Proposal)
         assigns(:proposal).should be_persisted
       end
 
       it "redirects to proposals index" do
         post :create, {:proposal => valid_attributes, :authenticity_token => user.remember_token, 
-          :response => user.id}
-        response.should redirect_to proposals_paths
-      end
+          :response => {:user_id => user.id}}
+        response.should redirect_to proposals_path      end
     end
 
     describe "with invalid params" do
@@ -106,64 +129,4 @@ describe ProposalsController do
       end
     end
   end
-=begin
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested soa_proposal" do
-        proposal = Soa::Proposal.create! valid_attributes
-        # Assuming there are no other soa_proposals in the database, this
-        # specifies that the Soa::Proposal created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Soa::Proposal.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => proposal.to_param, :soa_proposal => {'these' => 'params'}}, valid_session
-      end
-
-      it "assigns the requested soa_proposal as @soa_proposal" do
-        proposal = Soa::Proposal.create! valid_attributes
-        put :update, {:id => proposal.to_param, :soa_proposal => valid_attributes}, valid_session
-        assigns(:soa_proposal).should eq(proposal)
-      end
-
-      it "redirects to the soa_proposal" do
-        proposal = Soa::Proposal.create! valid_attributes
-        put :update, {:id => proposal.to_param, :soa_proposal => valid_attributes}, valid_session
-        response.should redirect_to(proposal)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the soa_proposal as @soa_proposal" do
-        proposal = Soa::Proposal.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Soa::Proposal.any_instance.stub(:save).and_return(false)
-        put :update, {:id => proposal.to_param, :soa_proposal => {}}, valid_session
-        assigns(:soa_proposal).should eq(proposal)
-      end
-
-      it "re-renders the 'edit' template" do
-        proposal = Soa::Proposal.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Soa::Proposal.any_instance.stub(:save).and_return(false)
-        put :update, {:id => proposal.to_param, :soa_proposal => {}}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested soa_proposal" do
-      proposal = Soa::Proposal.create! valid_attributes
-      expect {
-        delete :destroy, {:id => proposal.to_param}, valid_session
-      }.to change(Soa::Proposal, :count).by(-1)
-    end
-
-    it "redirects to the soa_proposals list" do
-      proposal = Soa::Proposal.create! valid_attributes
-      delete :destroy, {:id => proposal.to_param}, valid_session
-      response.should redirect_to(soa_proposals_url)
-    end
-  end
-=end
 end
