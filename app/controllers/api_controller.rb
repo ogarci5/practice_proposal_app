@@ -12,6 +12,7 @@ class ApiController < ApplicationController
     @user = User.find(proposal.from_user.id)
     if authenticated
       @response.update_attributes(body: params[:body])
+      ResponseMailer.response_email(@response.proposal).deliver
       # email_proposer(@user.email, @proposal)
     end
     respond_with(params, :status => 200)

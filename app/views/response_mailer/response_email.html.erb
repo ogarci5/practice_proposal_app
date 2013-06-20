@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 			<td>From: </td>							
-			<td><%= @proposal.from %></td>
+			<td><%= @proposal.from_user.name %></td>
 		</tr>
 		<tr>
 			<td>Description: </td>			
@@ -24,7 +24,7 @@
 		</tr>
 		<tr>
 			<td>Response: </td>							
-			<td><%= @proposal.response %></td>
+			<td><%= @proposal.response_body %></td>
 		</tr>
 	</table>
 </body>
