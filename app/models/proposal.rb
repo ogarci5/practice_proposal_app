@@ -34,7 +34,7 @@ class Proposal < ActiveRecord::Base
   end
   def response_body
     response = self.response
-    return !response.body
+    return response.body
   end
   def read
     response = self.response

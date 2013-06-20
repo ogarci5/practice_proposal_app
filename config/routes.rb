@@ -14,6 +14,9 @@ PracticeProposalApp::Application.routes.draw do
 
   mount Resque::Server.new, :at => "/resque"  
 
+  # Catch unroutable paths and send to the routing error handler
+  match '*a', :to => 'errors#routing_error'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

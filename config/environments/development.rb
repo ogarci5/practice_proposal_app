@@ -47,13 +47,22 @@ PracticeProposalApp::Application.configure do
   # }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'baci.linsaar.net',
+    :user_name            => 'ogarci5',
+    :password             => 'az898265',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
   
   # Set up Exception Notifier
-  config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[Whatever] ",
-      :sender_address => %{"notifier" <notifier@example.com>},
-      :exception_recipients => %w{exceptions@example.com}
-    }
+  config.middleware.use ExceptionNotifier,
+    sender_address: 'mailer@mydomain.ca',
+    exception_recipients: 'admin@mydomain.ca',
+    ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.default_ignore_exceptions,
+    ignore_crawlers: %w{Googlebot bingbot}
     
 end
