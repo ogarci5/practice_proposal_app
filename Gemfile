@@ -16,6 +16,7 @@ gem "actionmailer", "~> 3.2.13"
 gem 'httparty'
 gem 'rest-client'
 gem 'multimap'
+gem 'exception_notification'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
