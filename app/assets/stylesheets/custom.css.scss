@@ -32,11 +32,11 @@ body {
   }
 }
 .blur {
-	font-size:32px;
-	line-height:32px;
-	font-weight:700;
-  color: transparent;
-  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+	font-size:40px;
+	line-height:40px;
+	font-weight:900;
+  color: rgba(122,0,0,0.4);
+  text-shadow: 0 0 7px black;
 }
 #centered-div {
 	margin-left: -125px;
@@ -59,9 +59,9 @@ body {
 	visibility: visible;
 	width:100%;
 }
-/*#error-body {
-	background:#c5c5c5 url('404.jpg') no-repeat center center;
-}*/
+body#error-body {
+	background:#010101 url('404.png') no-repeat fixed center center;
+}
 .label-inform {
 	background-color:#A60004;
 }

@@ -61,7 +61,7 @@ PracticeProposalApp::Application.configure do
   # Set up Exception Notifier
   config.middleware.use ExceptionNotifier,
     sender_address: 'mailer@mydomain.ca',
-    exception_recipients: 'admin@mydomain.ca',
+    exception_recipients: 'ogarci5@gmail.com',
     ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.default_ignore_exceptions,
     ignore_crawlers: %w{Googlebot bingbot}
     

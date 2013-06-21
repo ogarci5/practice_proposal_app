@@ -5,7 +5,7 @@ class ProposalsController < ApplicationController
     @received = Proposal.all.find_all {|p| !p.reviewed? && p.to_user.id == current_user.id}
   end
   def show
-    @proposal = Proposal.find(params[:id])
+    @proposal = Proposal.find(params[:id]).length
     if @proposal.reviewed? && @proposal.from_user.id == current_user.id
       response = @proposal.response
       response.read = true
