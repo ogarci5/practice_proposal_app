@@ -6,6 +6,7 @@ PracticeProposalApp::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :proposals
   resources :responses
+  resources :incoming_messages, only: :create
 
   match "/login", to: "sessions#new"
   match "/logout", to: 'sessions#destroy', via: :delete

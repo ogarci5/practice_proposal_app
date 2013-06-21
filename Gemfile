@@ -17,6 +17,7 @@ gem 'httparty'
 gem 'rest-client'
 gem 'multimap'
 gem 'exception_notification', :require => 'exception_notifier'
+gem 'twilio-ruby'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
