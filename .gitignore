@@ -29,3 +29,10 @@ Gemfile.orig
 *.rb.BASE.*
 *.rb.REMOTE.*
 *.rb.orig*
+
+# ignore ssl keys and certs
+/config/certs/*.key
+/config/certs/*.crt
+
+# ignore ssl startup script
+/script/ssl_rails

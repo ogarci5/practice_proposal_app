@@ -9,7 +9,7 @@ PracticeProposalApp::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -28,7 +28,7 @@ PracticeProposalApp::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
@@ -47,7 +47,6 @@ PracticeProposalApp::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
@@ -76,10 +75,10 @@ PracticeProposalApp::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   
   # Set up Exception Notifier
-  config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[Whatever] ",
-      :sender_address => %{"notifier" <notifier@example.com>},
-      :exception_recipients => %w{exceptions@example.com}
-    }
+  config.middleware.use ExceptionNotifier,
+    sender_address: 'ogarci5@gmail.com',
+    exception_recipients: 'ogarci5@gmail.com',
+    ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.default_ignore_exceptions,
+    ignore_crawlers: %w{Googlebot bingbot}
+  
 end
