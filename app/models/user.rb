@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_and_belongs_to_many :roles
-  
+  belongs_to :request_group
   validates :name, presence:   true, length: { minimum: 3, maximum: 50 }
 
   validates :username, presence:   true, uniqueness: true, 

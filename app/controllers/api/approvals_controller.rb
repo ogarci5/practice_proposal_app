@@ -6,7 +6,8 @@ class API::ApprovalsController < ApplicationController
     puts params
     ag = ApprovalGroup.find(params[:approval_group_id])
     a = ag.approvals.create(params[:approval])
-    a.requester = User.find_by_id(params[:requester_id])
+    a.requester = User.find(params[:requester_id])
+    a.request_group = RequestGroup.find(params[:request_group_id])
     a.save
     render :json => params
   end

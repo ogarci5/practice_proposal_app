@@ -23,11 +23,17 @@ module CreateDummyData
   cd.roles << dev_role
   cd.roles << manager_role
   
-  a = ApprovalGroup.create(name: "Team 1")
-  a.users << ty
-  a.users << joe
-   
-  a = ApprovalGroup.create(name: "Team A")
-  a.users << og
+  a = ApprovalGroup.create(name: "Real Estate")
   a.users << cd
+   
+  a = ApprovalGroup.create(name: "Finance")
+  a.users << ty
+  
+  r = RequestGroup.create(name: "Dev 1")
+  r.users << og
+  r.users << joe
+  
+  r = RequestGroup.create(name: "Man 1")
+  r.users << cd
+  r.users << ty
 end
