@@ -13,7 +13,13 @@ PracticeProposalApp::Application.routes.draw do
   match "/api", to: 'api#api_response', via: :post
   match "/_count", to: 'api#pr_count', via: :get
 
-  mount Resque::Server.new, :at => "/resque"  
+  mount Resque::Server.new, :at => "/resque"
+  
+  namespace :api, defaults: {format: :json} do
+    resources :proposals
+    resources :responses
+    resources :approvals
+  end
 
   # Catch unroutable paths and send to the routing error handler
   match '*a', :to => 'errors#routing_error'

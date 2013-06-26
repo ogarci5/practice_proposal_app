@@ -4,10 +4,14 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   # Force signout to prevent CSRF attacks
-  def handle_unverified_request
-    sign_out
-    super
+  def verified_request?
+    if request.content_type == "application/json"
+      true
+    else
+      super()
+    end
   end
+  
   before_filter :require_login
 
   #unless Rails.application.config.consider_all_requests_local

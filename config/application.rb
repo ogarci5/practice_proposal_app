@@ -64,6 +64,6 @@ module PracticeProposalApp
     }
     
     # Force the app to use https
-    config.force_ssl = true
+    # config.force_ssl = true
   end
 end
