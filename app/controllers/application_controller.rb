@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error(exception)
+=begin
     #ExceptionNotifier::Notifier
     #  .exception_notification(request.env, exception)
     #  .deliver
@@ -55,10 +56,11 @@ class ApplicationController < ActionController::Base
     puts @message
     render :template => "/errors/500.html.erb",
        :layout => 'errors.html.erb'
+=end
   end
   
   def response_sms(response)
-    
+=begin
     require 'rubygems'
     require 'twilio-ruby'
     
@@ -90,6 +92,7 @@ class ApplicationController < ActionController::Base
     @message1          = @account.sms.messages.create({from: @cd_twil_phone,
                         to: @cd_phone, body: @message})
     puts "Sent response SMS to #{@cd_phone}: #{@message}"
+=end
   end
   
   def routing_error

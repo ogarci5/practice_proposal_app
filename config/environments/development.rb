@@ -59,10 +59,10 @@ PracticeProposalApp::Application.configure do
     :enable_starttls_auto => true  }
   
   # Set up Exception Notifier
-  config.middleware.use ExceptionNotifier,
-    sender_address: 'ogarci5@gmail.com',
-    exception_recipients: 'ogarci5@gmail.com',
-    ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.default_ignore_exceptions,
-    ignore_crawlers: %w{Googlebot bingbot}
+#  config.middleware.use ExceptionNotifier,
+#    sender_address: 'ogarci5@gmail.com',
+#    exception_recipients: 'ogarci5@gmail.com',
+    #ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.default_ignore_exceptions,
+#    ignore_crawlers: %w{Googlebot bingbot}
     
 end
