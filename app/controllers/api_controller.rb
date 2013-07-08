@@ -12,13 +12,13 @@ class ApiController < ApplicationController
     @user = User.find(proposal.from_user.id)
     if authenticated
       @response.update_attributes(body: params[:body])
-      ResponseMailer.response_email(@response.proposal).deliver
-      # email_proposer(@user.email, @proposal)
+      response_sms(@response)
     end
     respond_with(params, :status => 200)
   end
   after_filter :close_connection, :only => [:api_response]
 
+  # Used for auto-upda
   def pr_count
     if current_user
       @received_responses = Proposal.where(:user_id => current_user.id).find_all { |p| 

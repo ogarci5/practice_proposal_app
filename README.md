@@ -27,8 +27,15 @@ gem 'newrelic_rpm'
 Install the new gem:
 
 	$ bundle install
-	
+
 Add the `newrelic.yml` file provided by New Relic to `config/`  
 Restart the server.
 Go to https://rpm.newrelic.com/accounts/349165/applications/2127803
 Steps from http://redis.io/topics/quickstart
+
+
+#### Rails
+
+To start the default server in production modesdf'lksdflk
+
+	$ bundle exec s -e production

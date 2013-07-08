@@ -2,7 +2,8 @@ PracticeProposalApp::Application.routes.draw do
   require 'resque/server'
 
   root to: "home#index"
-  resources :users
+  resources :users,
+            constraints: { :protocol => "https" }
   resources :sessions, only: [:new, :create, :destroy]
   resources :proposals
   resources :responses

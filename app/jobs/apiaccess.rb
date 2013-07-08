@@ -5,14 +5,23 @@ module APIAccess
   def self.perform(response, authentication)
    	puts "Connecting to PM Mobile to update fields"
     require 'net/http'
+    require 'net/https'
     message = response.merge!(authentication)
     #header = {'X-CSRF-Token' => authentication[:authenticity_token]}
     #@host = 'localhost'
     #@port = '3000'
-    uri = URI.parse("http://localhost:3000/api")
+    uri = ""
+    if Rails.env.production?
+      uri = URI.parse("https://localhost:3000/api")
+    else  
+      uri = URI.parse("http://localhost:3000/api")
+    end
+  
+    
     #@path = '/responses'
     @body = ActiveSupport::JSON.encode(message)
 
+=begin
     puts @body
     request = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json',
       'Accept' =>'application/json'})
@@ -23,6 +32,30 @@ module APIAccess
       p http
       http.request(request) 
     end
+=end
+    
+
+    # see: http://stackoverflow.com/questions/7798926/ruby-blocking-http-new-start-and-dynamic-https
+    http = Net::HTTP.new(uri.host, uri.port)
+    p http
+    
+    if uri.scheme =='https'
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+    
+    http.set_debug_output $stderr
+
+    http.start do |h|
+      request = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json',
+        'Accept' =>'application/json'})
+      
+      request.body = @body
+      p uri
+      p request
+      h.request(request)
+    end
+    
     #response = HTTParty.post('http://localhost:3000/responses', body: @body, headers: initheader)
     #puts response.body, response.code, response.message, response.headers.inspect
     #puts response.body if response.response_body_permitted?

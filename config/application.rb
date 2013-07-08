@@ -63,7 +63,8 @@ module PracticeProposalApp
       "<div class=\"field_with_errors control-group error\">#{html_tag}</div>".html_safe
     }
     
-    # Force the app to use https
-    config.force_ssl = true
+    # config/application.rb
+    # config.force_ssl = true
+    
   end
 end

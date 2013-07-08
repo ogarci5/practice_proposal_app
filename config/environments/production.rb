@@ -81,4 +81,7 @@ PracticeProposalApp::Application.configure do
     ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.default_ignore_exceptions,
     ignore_crawlers: %w{Googlebot bingbot}
   
+  # config/application.rb
+  config.force_ssl = true
+  
 end
