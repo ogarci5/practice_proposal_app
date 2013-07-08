@@ -75,6 +75,7 @@ PracticeProposalApp::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   
   # Set up Exception Notifier
+=begin
   config.middleware.use ExceptionNotifier,
     sender_address: 'ogarci5@gmail.com',
     exception_recipients: 'ogarci5@gmail.com',
@@ -83,5 +84,5 @@ PracticeProposalApp::Application.configure do
   
   # config/application.rb
   config.force_ssl = true
-  
+=end  
 end
