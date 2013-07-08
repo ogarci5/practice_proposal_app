@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618142132) do
+ActiveRecord::Schema.define(:version => 20130626123845) do
+
+  create_table "approval_groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "approvals", :force => true do |t|
+    t.string   "name"
+    t.string   "status"
+    t.text     "comment"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "requester_id"
+    t.integer  "approval_group_id"
+    t.integer  "request_group_id"
+  end
 
   create_table "proposals", :force => true do |t|
     t.string   "name"
@@ -22,6 +39,12 @@ ActiveRecord::Schema.define(:version => 20130618142132) do
   end
 
   add_index "proposals", ["user_id"], :name => "index_proposals_on_user_id"
+
+  create_table "request_groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "responses", :force => true do |t|
     t.text     "body"
@@ -35,14 +58,27 @@ ActiveRecord::Schema.define(:version => 20130618142132) do
   add_index "responses", ["proposal_id"], :name => "index_responses_on_proposal_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "remember_token"
     t.string   "password_digest"
     t.string   "username"
+    t.integer  "approval_group_id"
+    t.integer  "request_group_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
