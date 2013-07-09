@@ -19,6 +19,7 @@ gem 'multimap'
 gem 'exception_notification', :require => 'exception_notifier'
 gem 'twilio-ruby'
 gem "rack-ssl", "~> 1.3.3"
+gem "capistrano"
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
